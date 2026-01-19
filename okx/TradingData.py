@@ -72,6 +72,56 @@ class TradingDataAPI(OkxClient):
             params['limit'] = limit
         return self._request_with_params(GET, CONTRACTS_OPEN_INTEREST_HISTORY, params)
 
+    def get_taker_volume_contract(self, instId, period=None, begin=None, end=None, limit=None, unit=None):
+        params = {'instId': instId}
+        if period is not None:
+            params['period'] = period
+        if begin is not None:
+            params['begin'] = begin
+        if end is not None:
+            params['end'] = end
+        if limit is not None:
+            params['limit'] = limit
+        if unit is not None:
+            params['unit'] = limit
+        return self._request_with_params(GET, TAKER_VOLUME_CONTRACT, params)
+
+    def get_long_short_ratio_contract_top_trader(self, instId, period=None, begin=None, end=None, limit=None):
+        params = {'instId': instId}
+        if period is not None:
+            params['period'] = period
+        if begin is not None:
+            params['begin'] = begin
+        if end is not None:
+            params['end'] = end
+        if limit is not None:
+            params['limit'] = limit
+        return self._request_with_params(GET, LONG_SHORT_RATIO_CONTRACT_TOP_TRADER, params)
+
+    def get_long_short_position_ratio_contract_top_trader(self, instId, period=None, begin=None, end=None, limit=None):
+        params = {'instId': instId}
+        if period is not None:
+            params['period'] = period
+        if begin is not None:
+            params['begin'] = begin
+        if end is not None:
+            params['end'] = end
+        if limit is not None:
+            params['limit'] = limit
+        return self._request_with_params(GET, LONG_SHORT_POSITION_RATIO_CONTRACT_TOP_TRADER, params)
+
+
+    def get_long_short_account_ratio_contract(self, instId, period=None, begin=None, end=None, limit=None):
+        params = {'instId': instId}
+        if period is not None:
+            params['period'] = period
+        if begin is not None:
+            params['begin'] = begin
+        if end is not None:
+            params['end'] = end
+        if limit is not None:
+            params['limit'] = limit
+        return self._request_with_params(GET, LONG_SHORT_ACCOUNT_RATIO_CONTRACT, params)
 
 
 

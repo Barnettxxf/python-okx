@@ -144,6 +144,10 @@ OPEN_INTEREST_VOLUME_EXPIRY = '/api/v5/rubik/stat/option/open-interest-volume-ex
 INTEREST_VOLUME_STRIKE = '/api/v5/rubik/stat/option/open-interest-volume-strike'
 TAKER_FLOW = '/api/v5/rubik/stat/option/taker-block-volume'
 CONTRACTS_OPEN_INTEREST_HISTORY = '/api/v5/rubik/stat/contracts/open-interest-history'
+TAKER_VOLUME_CONTRACT = '/api/v5/rubik/stat/taker-volume-contract'
+LONG_SHORT_RATIO_CONTRACT_TOP_TRADER = '/api/v5/rubik/stat/contracts/long-short-account-ratio-contract-top-trader'
+LONG_SHORT_POSITION_RATIO_CONTRACT_TOP_TRADER = '/api/v5/rubik/stat/contracts/long-short-position-ratio-contract-top-trader'
+LONG_SHORT_ACCOUNT_RATIO_CONTRACT = '/api/v5/rubik/stat/contracts/long-short-account-ratio-contract'
 
 # Trade
 PLACR_ORDER = '/api/v5/trade/order'
