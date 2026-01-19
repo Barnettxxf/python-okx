@@ -131,6 +131,7 @@ CONVERT_CONTRACT_COIN = '/api/v5/public/convert-contract-coin'
 GET_OPTION_TICKBANDS = '/api/v5/public/instrument-tick-bands'
 GET_OPTION_TRADES = '/api/v5/public/option-trades'
 MARKET_DATA_HISTORY = '/api/v5/public/market-data-history'
+ECONOMIC_CALENDAR = '/api/v5/public/economic-calendar'
 
 # Trading data
 SUPPORT_COIN = '/api/v5/rubik/stat/trading-data/support-coin'

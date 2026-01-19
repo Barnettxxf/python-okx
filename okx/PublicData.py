@@ -137,3 +137,18 @@ class PublicAPI(OkxClient):
         if instFamilyList is not None:
             params['instFamilyList'] = instFamilyList
         return self._request_with_params(GET, MARKET_DATA_HISTORY, params)
+
+    def get_economic_calendar(self, region=None, importance=None, before=None,
+                              after=None, limit=None):
+        params = {}
+        if region:
+            params['region'] = region
+        if importance:
+            params['importance'] = importance
+        if before:
+            params['before'] = before
+        if after:
+            params['after'] = after
+        if limit:
+            params['limit'] = limit
+        return self._request_with_params(GET, ECONOMIC_CALENDAR, params)
