@@ -152,3 +152,7 @@ class PublicAPI(OkxClient):
         if limit:
             params['limit'] = limit
         return self._request_with_params(GET, ECONOMIC_CALENDAR, params)
+
+    def get_liquidation_orders(self, instId, limit=100):
+        params = {'instId': instId, 'limit': limit}
+        return self._request_with_params(GET, LIQUIDATION_ORDERS, params)
