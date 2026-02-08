@@ -9,12 +9,12 @@ logger = logging.getLogger(__name__)
 
 
 class WsPublicAsync:
-    def __init__(self, url, apiKey='', passphrase='', secretKey='', debug=False):
+    def __init__(self, url, apiKey='', passphrase='', secretKey='', debug=False, proxy=None):
         self.url = url
         self.subscriptions = set()
         self.callback = None
         self.loop = asyncio.get_event_loop()
-        self.factory = WebSocketFactory(url)
+        self.factory = WebSocketFactory(url, proxy=proxy)
         self.websocket = None
         self.debug = debug
         # Credentials for business channel login
