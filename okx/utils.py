@@ -49,7 +49,7 @@ def parse_params_to_str(params):
 
 
 def get_timestamp():
-    now = datetime.datetime.utcnow()
+    now = datetime.datetime.now(datetime.UTC)
     t = now.isoformat("T", "milliseconds")
     return t + "Z"
 
