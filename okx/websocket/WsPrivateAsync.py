@@ -22,6 +22,7 @@ class WsPrivateAsync:
         self.useServerTime = False
         self.websocket = None
         self.debug = debug
+        self.closed = -1
 
         # Set log level
         if debug:
@@ -33,13 +34,18 @@ class WsPrivateAsync:
 
     async def connect(self):
         self.websocket = await self.factory.connect()
+        self.closed = 0
 
     async def consume(self):
-        async for message in self.websocket:
-            if self.debug:
-                logger.debug("Received message: {%s}", message)
-            if self.callback:
-                self.callback(message)
+        try:
+            async for message in self.websocket:
+                if self.debug:
+                    logger.debug("Received message: {%s}", message)
+                if self.callback:
+                    self.callback(message)
+        except Exception as e:
+            logger.exception(e)
+            self.closed = 1
 
     async def subscribe(self, params: list, callback, id: str = None):
         self.callback = callback
@@ -193,8 +199,10 @@ class WsPrivateAsync:
             logger.debug("Connecting to WebSocket...")
         else:
             logger.info("Connecting to WebSocket...")
+        self.closed = -1
         await self.connect()
         self.loop.create_task(self.consume())
+        self.closed = 0
 
     def stop_sync(self):
         if self.loop.is_running():

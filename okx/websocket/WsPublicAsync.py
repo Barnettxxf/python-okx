@@ -22,6 +22,7 @@ class WsPublicAsync:
         self.passphrase = passphrase
         self.secretKey = secretKey
         self.isLoggedIn = False
+        self.closed = -1
 
         # Set log level
         if debug:
@@ -29,13 +30,18 @@ class WsPublicAsync:
 
     async def connect(self):
         self.websocket = await self.factory.connect()
+        self.closed = 0
 
     async def consume(self):
-        async for message in self.websocket:
-            if self.debug:
-                logger.debug("Received message: {%s}", message)
-            if self.callback:
-                self.callback(message)
+        try:
+            async for message in self.websocket:
+                if self.debug:
+                    logger.debug("Received message: {%s}", message)
+                if self.callback:
+                    self.callback(message)
+        except Exception as e:
+            logger.exception(e)
+            self.closed = 1
 
     async def login(self):
         """
@@ -114,8 +120,10 @@ class WsPublicAsync:
             logger.debug("Connecting to WebSocket...")
         else:
             logger.info("Connecting to WebSocket...")
+        self.closed = -1
         await self.connect()
         self.loop.create_task(self.consume())
+        self.closed = 0
 
     def stop_sync(self):
         if self.loop.is_running():
