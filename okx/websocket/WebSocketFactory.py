@@ -10,9 +10,10 @@ logger = logging.getLogger(__name__)
 
 class WebSocketFactory:
 
-    def __init__(self, url, proxy=None):
+    def __init__(self, url, proxy=None, **ws_factory_kwargs):
         self.url = url
         self.websocket = None
+        self.ws_factory_kwargs = ws_factory_kwargs
         self.proxy = proxy
         self.loop = asyncio.get_event_loop()
 
@@ -20,7 +21,7 @@ class WebSocketFactory:
         ssl_context = ssl.create_default_context()
         ssl_context.load_verify_locations(certifi.where())
         try:
-            self.websocket = await websockets.connect(self.url, ssl=ssl_context, proxy=self.proxy)
+            self.websocket = await websockets.connect(self.url, ssl=ssl_context, proxy=self.proxy, **self.ws_factory_kwargs)
             logger.info("WebSocket connection established.")
             return self.websocket
         except Exception as e:
