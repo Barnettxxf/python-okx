@@ -83,7 +83,7 @@ class TradingDataAPI(OkxClient):
         if limit is not None:
             params['limit'] = limit
         if unit is not None:
-            params['unit'] = limit
+            params['unit'] = unit
         return self._request_with_params(GET, TAKER_VOLUME_CONTRACT, params)
 
     def get_long_short_ratio_contract_top_trader(self, instId, period=None, begin=None, end=None, limit=None):
